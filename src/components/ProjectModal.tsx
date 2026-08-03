@@ -18,27 +18,30 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
   if (!project) return null;
 
   const embedUrl = project.videoUrl ? getYouTubeEmbedUrl(project.videoUrl) : null;
+  const isShorts = project.videoUrl ? project.videoUrl.includes('shorts') : false;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-slate-950/85 backdrop-blur-md animate-fadeIn">
       
       {/* Modal Card Box */}
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl glass-card bg-slate-900/95 border border-blue-500/30 p-6 sm:p-8 shadow-2xl animate-scaleUp"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl glass-card bg-slate-900/95 border border-blue-500/30 p-4 sm:p-8 shadow-2xl animate-scaleUp my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors z-20"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2.5 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors z-20 shadow-lg min-w-[42px] min-h-[42px] flex items-center justify-center"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Banner Media Container */}
-        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 mb-6 border border-slate-800">
+        <div className={`relative w-full rounded-2xl overflow-hidden bg-slate-950 mb-6 border border-slate-800 shadow-xl ${
+          isShorts ? 'aspect-[9/16] max-w-[280px] xs:max-w-[320px] mx-auto' : 'aspect-video'
+        }`}>
           {embedUrl ? (
             <iframe
               src={embedUrl}
@@ -55,19 +58,19 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
               className="w-full h-full object-cover"
             />
           )}
-          <div className="absolute top-4 left-4 z-10 pointer-events-none">
-            <span className="px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-blue-600/90 shadow-md backdrop-blur-md border border-blue-400/30">
+          <div className="absolute top-3 left-3 z-10 pointer-events-none">
+            <span className="px-3 py-1 rounded-lg text-xs font-bold text-white bg-blue-600/90 shadow-md backdrop-blur-md border border-blue-400/30">
               {project.category}
             </span>
           </div>
         </div>
 
         {/* Project Information */}
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           
           <div>
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2 pr-8 sm:pr-0">
+              <h3 className="text-xl sm:text-3xl font-extrabold text-white">
                 {project.title}
               </h3>
               {project.stats && (
@@ -77,9 +80,9 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-slate-400">
               <span className="flex items-center gap-1">
-                <strong>Client:</strong> {project.client}
+                <strong className="text-slate-300">Client:</strong> {project.client}
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
@@ -89,7 +92,7 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
             </div>
           </div>
 
-          <p className="text-sm text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             {project.description}
           </p>
 
@@ -103,7 +106,7 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {project.deliverables.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -130,14 +133,14 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
           </div>
 
           {/* Bottom Action Footer */}
-          <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-3">
+          <div className="pt-5 border-t border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="flex flex-col xs:flex-row items-stretch sm:items-center gap-2.5">
               <button
                 onClick={() => {
                   onClose();
                   onOpenHireModal(project.category);
                 }}
-                className="px-6 py-3 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/30"
+                className="w-full xs:w-auto px-5 py-3 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/30 text-center min-h-[44px]"
               >
                 Request Similar Project
               </button>
@@ -147,7 +150,7 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
                   href={project.videoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-500 transition-colors shadow-lg shadow-red-600/30"
+                  className="w-full xs:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-500 transition-colors shadow-lg shadow-red-600/30 min-h-[44px]"
                 >
                   <span>Watch on YouTube</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -157,7 +160,7 @@ export default function ProjectModal({ project, onClose, onOpenHireModal }: Proj
 
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors text-center"
             >
               Close Window
             </button>

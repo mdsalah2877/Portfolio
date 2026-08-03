@@ -130,42 +130,50 @@ export default function Navbar({ onOpenHireModal }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Backdrop & Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[65px] bg-slate-950/95 backdrop-blur-2xl border-b border-slate-800 p-6 shadow-2xl transition-all duration-300">
-          <div className="flex flex-col gap-2 max-w-md mx-auto">
-            {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                    isActive 
-                      ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
-                      : 'text-slate-300 hover:bg-slate-900 hover:text-white'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {isActive && <div className="w-2 h-2 rounded-full bg-blue-400" />}
-                </button>
-              );
-            })}
+        <>
+          {/* Backdrop overlay */}
+          <div 
+            className="lg:hidden fixed inset-0 top-[65px] bg-slate-950/80 backdrop-blur-md z-30 transition-opacity"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="lg:hidden fixed inset-x-0 top-[65px] bg-slate-950/95 border-b border-slate-800 p-5 shadow-2xl z-40 transition-all duration-300 max-h-[calc(100vh-70px)] overflow-y-auto">
+            <div className="flex flex-col gap-2 max-w-md mx-auto">
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-semibold transition-colors min-h-[48px] active:scale-[0.98] ${
+                      isActive 
+                        ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
+                        : 'text-slate-200 hover:bg-slate-900 hover:text-white'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {isActive && <div className="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-sm shadow-blue-400/50" />}
+                  </button>
+                );
+              })}
 
-            <div className="pt-4 border-t border-slate-800 mt-2">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenHireModal();
-                }}
-                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-600/30"
-              >
-                <span>Let's Build Together</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="pt-4 border-t border-slate-800 mt-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenHireModal();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-600/30 active:scale-[0.98] min-h-[48px]"
+                >
+                  <Sparkles className="w-4 h-4 text-blue-200" />
+                  <span>Let's Build Together</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

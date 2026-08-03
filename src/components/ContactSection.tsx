@@ -133,7 +133,7 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
 
           {/* Right Column - Interactive Form */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl glass-card border border-slate-800 bg-slate-900/60 shadow-2xl">
+            <div className="p-5 sm:p-8 md:p-10 rounded-3xl glass-card border border-slate-800 bg-slate-900/60 shadow-2xl">
               
               {isSubmitted ? (
                 <div className="py-12 text-center flex flex-col items-center justify-center">
@@ -152,9 +152,9 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                     {/* Name Input */}
                     <div>
                       <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
@@ -167,7 +167,7 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-base sm:text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
                       />
                     </div>
 
@@ -183,7 +183,7 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="john@example.com"
-                        className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-base sm:text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
                       />
                     </div>
                   </div>
@@ -197,7 +197,7 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
                       id="contact-service"
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-base sm:text-sm focus:outline-none focus:border-blue-500 transition-colors"
                     >
                       {SERVICES_DATA.map((srv) => (
                         <option key={srv.id} value={srv.title} className="bg-slate-900 text-white">
@@ -222,7 +222,7 @@ export default function ContactSection({ initialService }: ContactSectionProps) 
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Describe your goals, budget, timeline, and vision..."
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-base sm:text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
                     />
                   </div>
 

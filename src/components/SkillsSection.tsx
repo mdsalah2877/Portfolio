@@ -56,17 +56,17 @@ export default function SkillsSection() {
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {/* Category Tabs - Horizontal Scroll on Mobile */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 mb-10 overflow-x-auto max-w-full pb-2 px-1 no-scrollbar touch-pan-x">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               id={`skill-tab-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap shrink-0 min-h-[42px] ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/30'
-                  : 'glass-card text-slate-400 hover:text-white hover:bg-slate-800/80 border border-slate-800'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/30 font-bold'
+                  : 'glass-card text-slate-300 hover:text-white hover:bg-slate-800/80 border border-slate-800'
               }`}
             >
               {tab.label}
@@ -75,11 +75,11 @@ export default function SkillsSection() {
         </div>
 
         {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredSkills.map((skill) => (
             <div
               key={skill.id}
-              className="p-6 rounded-2xl glass-card glass-card-hover border border-slate-800 bg-slate-900/50 flex flex-col justify-between group"
+              className="p-4 sm:p-6 rounded-2xl glass-card glass-card-hover border border-slate-800 bg-slate-900/50 flex flex-col justify-between group"
             >
               <div>
                 {/* Card Header: Icon, Name, Exp Tag */}
